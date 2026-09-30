@@ -1,10 +1,39 @@
-export default function App() {
+import { useState } from 'react'
+import { RegisterScreen, type Player } from './components/RegisterScreen'
+import { QuizScreen, type Answer } from './components/QuizScreen'
+import { ResultScreen } from './components/ResultScreen'
+import { Telao } from './components/Telao'
+
+type Stage =
+  | { name: 'register' }
+  | { name: 'quiz'; player: Player }
+  | { name: 'result'; player: Player; answers: Answer[] }
+
+function Game() {
+  const [stage, setStage] = useState<Stage>({ name: 'register' })
+
   return (
-    <main className="grid min-h-screen place-items-center">
-      <div className="rounded-2xl border border-line bg-panel p-8">
-        <h1 className="text-4xl font-black text-upper-2">Upper Quiz</h1>
-        <p className="mt-2 text-muted">Tailwind funcionando.</p>
-      </div>
+    <main className="mx-auto max-w-6xl px-4 py-8 md:px-6">
+      {stage.name === 'register' && (
+        <RegisterScreen onStart={(player) => setStage({ name: 'quiz', player })} />
+      )}
+
+      {stage.name === 'quiz' && (
+        <QuizScreen onFinish={(answers) => setStage({ name: 'result', player: stage.player, answers })} />
+      )}
+
+{stage.name === 'result' && (
+  <ResultScreen
+    player={stage.player}
+    answers={stage.answers}
+    onReset={() => setStage({ name: 'register' })}
+  />
+)}
     </main>
   )
+}
+
+export default function App() {
+  const path = window.location.pathname.replace(/\/+$/, '')
+  return path === '/telao' ? <Telao /> : <Game />
 }
