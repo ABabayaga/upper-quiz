@@ -67,19 +67,19 @@ export function QuizScreen({ onFinish }: { onFinish: (answers: Answer[]) => void
   const urgent = seconds <= 3
 
   function optionClass(i: number) {
-    const base = 'flex w-full items-center gap-4 rounded-xl border px-4 py-4 text-left font-medium transition'
-    if (!locked) return `${base} border-line bg-panel-2 hover:border-upper hover:bg-upper/10 active:scale-[0.99]`
-    if (i === question.correct) return `${base} border-good bg-good/15 text-good`
-    if (i === locked.choice) return `${base} border-bad bg-bad/15 text-bad`
-    return `${base} border-line bg-panel-2 opacity-50`
+    const base = 'flex w-full items-center gap-4 rounded-lg px-4 py-4 text-left font-medium ring-1 transition'
+    if (!locked) return `${base} bg-panel-2 ring-transparent hover:bg-upper/15 hover:ring-upper active:scale-[0.99]`
+    if (i === question.correct) return `${base} bg-good/15 text-good ring-good`
+    if (i === locked.choice) return `${base} bg-bad/15 text-bad ring-bad`
+    return `${base} bg-panel-2 ring-transparent opacity-50`
   }
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="rounded-3xl border border-line bg-panel p-6 md:p-10">
+      <div className="rounded-xl bg-panel p-5 md:p-10">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            <span className="text-4xl font-black text-upper-2">{String(index + 1).padStart(2, '0')}</span>
+            <span className="font-display text-5xl font-bold tabular-nums text-upper-2">{String(index + 1).padStart(2, '0')}</span>
             <div>
               <p className="font-semibold">Pergunta {index + 1} de {QUESTIONS.length}</p>
               <p className="text-sm text-muted">Escolha uma alternativa</p>
@@ -92,18 +92,18 @@ export function QuizScreen({ onFinish }: { onFinish: (answers: Answer[]) => void
               background: `conic-gradient(${urgent ? 'var(--color-bad)' : 'var(--color-upper-2)'} ${(left / QUESTION_TIME_MS) * 360}deg, var(--color-panel-2) 0deg)`,
             }}
           >
-            <span className={`grid size-12 place-items-center rounded-full bg-panel text-xl font-black ${urgent ? 'text-bad' : ''}`}>
+            <span className={`grid size-12 place-items-center rounded-full bg-panel font-display text-2xl font-bold tabular-nums ${urgent ? 'text-bad' : ''}`}>
               {seconds}
             </span>
           </div>
         </div>
 
-        <h2 className="mt-8 text-2xl font-bold leading-snug md:text-3xl">{question.q}</h2>
+        <h2 className="mt-8 font-display text-3xl font-semibold leading-tight md:text-4xl">{question.q}</h2>
 
         <div className="mt-6 grid gap-3 md:grid-cols-2">
           {question.a.map((option, i) => (
             <button key={option} type="button" disabled={!!locked} onClick={() => register(i)} className={optionClass(i)}>
-              <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-ink text-sm font-bold">{LETTERS[i]}</span>
+              <span className="grid size-8 shrink-0 place-items-center rounded-md bg-ink font-display text-lg font-bold">{LETTERS[i]}</span>
               {option}
             </button>
           ))}

@@ -2,6 +2,7 @@
 
 @theme {
   --font-sans: "Inter", Arial, Helvetica, sans-serif;
+  --font-display: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
   --color-upper: #1b99ad;
   --color-upper-2: #27b1c7;
   --color-ink: #030405;
@@ -13,6 +14,25 @@
   --color-good: #55d6a9;
   --color-bad: #ff6b78;
   --color-warn: #ffca68;
+
+  --animate-rise: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise {
+    animation: none;
+  }
 }
 
 body {

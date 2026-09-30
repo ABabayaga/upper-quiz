@@ -51,6 +51,14 @@ export type NewResult = {
     return data ?? []
   }
 
+  export async function countResults() {
+    const { count, error } = await supabase
+      .from('results')
+      .select('id', { count: 'exact', head: true })
+    if (error) throw error
+    return count ?? 0
+  }
+
   export async function instagramExists(instagram: string) {
     const { data, error } = await supabase
       .from('results')

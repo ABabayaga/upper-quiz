@@ -47,9 +47,9 @@ export function ResultScreen({ player, answers, onReset }: Props) {
 
   return (
     <div className="grid gap-5 md:grid-cols-[1.2fr_1fr]">
-      <section className="rounded-3xl border border-line bg-panel p-7 md:p-10">
+      <section className="rounded-xl bg-panel p-6 md:p-10">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-upper-2">Desafio concluído</p>
-        <h1 className="mt-3 text-4xl font-black md:text-5xl">
+        <h1 className="mt-3 font-display text-5xl font-bold leading-none md:text-6xl">
           {status === 'duplicate' ? 'Você já participou.' : 'Resultado registrado.'}
         </h1>
 
@@ -71,19 +71,19 @@ export function ResultScreen({ player, answers, onReset }: Props) {
             ['Pontos', String(points)],
             ['Tempo', formatSeconds(timeMs)],
           ].map(([label, value]) => (
-            <div key={label} className="rounded-xl border border-line bg-panel-2 p-4">
+            <div key={label} className="rounded-lg bg-panel-2 p-4">
               <p className="text-xs uppercase tracking-wider text-muted">{label}</p>
-              <p className="mt-1 text-xl font-black md:text-2xl">{value}</p>
+              <p className="mt-1 font-display text-3xl font-bold tabular-nums md:text-4xl">{value}</p>
             </div>
           ))}
         </div>
 
         <div className="mt-8 flex flex-wrap items-center gap-4">
-          <button onClick={onReset} className="rounded-xl bg-upper px-5 py-3 font-bold text-ink transition hover:bg-upper-2">
-            NOVO PARTICIPANTE
+          <button onClick={onReset} className="rounded-lg bg-upper px-5 py-3 font-display text-xl font-bold uppercase tracking-wide text-ink transition hover:bg-upper-2">
+            Novo participante
           </button>
-          <a href="https://www.instagram.com/grupoupper/" target="_blank" rel="noreferrer" className="font-semibold text-upper-2 hover:underline">
-            @grupoupper ↗
+          <a href="https://www.instagram.com/grupoupper/" target="_blank" rel="noreferrer" className="font-semibold text-upper-2 underline-offset-2 hover:underline">
+            @grupoupper
           </a>
         </div>
       </section>
