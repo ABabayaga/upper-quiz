@@ -41,7 +41,7 @@ export function RegisterScreen({ onStart }: { onStart: (p: Player) => void }) {
         <div className="grid overflow-hidden rounded-3xl border border-line bg-panel md:grid-cols-[1.2fr_1fr]">
             <section className="flex flex-col justify-between gap-8 p-7 md:p-12">
                 <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-upper-2">Você conhece a Upper?</p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-upper-2">Você conhece a Upper GR?</p>
                     <h1 className="mt-5 text-5xl font-black leading-[0.95] tracking-tight md:text-7xl">
                         5 perguntas.<br />50 segundos.<br />Valendo ranking.
                     </h1>
