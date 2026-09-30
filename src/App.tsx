@@ -22,13 +22,7 @@ function Game() {
         <QuizScreen onFinish={(answers) => setStage({ name: 'result', player: stage.player, answers })} />
       )}
 
-{stage.name === 'result' && (
-  <ResultScreen
-    player={stage.player}
-    answers={stage.answers}
-    onReset={() => setStage({ name: 'register' })}
-  />
-)}
+      {stage.name === 'result' && <ResultScreen player={stage.player} answers={stage.answers} />}
     </main>
   )
 }

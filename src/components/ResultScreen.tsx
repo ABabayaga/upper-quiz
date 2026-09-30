@@ -6,10 +6,10 @@ import { Leaderboard } from './Leaderboard'
 import type { Answer } from './QuizScreen'
 import type { Player } from './RegisterScreen'
 
-type Props = { player: Player; answers: Answer[]; onReset: () => void }
+type Props = { player: Player; answers: Answer[] }
 type Status = 'saving' | 'saved' | 'duplicate' | 'error'
 
-export function ResultScreen({ player, answers, onReset }: Props) {
+export function ResultScreen({ player, answers }: Props) {
   const score = answers.filter((a) => a.correct).length
   const points = score * POINTS_PER_HIT
   const timeMs = answers.reduce((sum, a) => sum + a.time_ms, 0)
@@ -78,13 +78,24 @@ export function ResultScreen({ player, answers, onReset }: Props) {
           ))}
         </div>
 
-        <div className="mt-8 flex flex-wrap items-center gap-4">
-          <button onClick={onReset} className="rounded-lg bg-upper px-5 py-3 font-display text-xl font-bold uppercase tracking-wide text-ink transition hover:bg-upper-2">
-            Novo participante
-          </button>
-          <a href="https://www.instagram.com/grupoupper/" target="_blank" rel="noreferrer" className="font-semibold text-upper-2 underline-offset-2 hover:underline">
-            @grupoupper
-          </a>
+        <div className="mt-8 rounded-lg bg-upper/10 p-5">
+          <p className="font-display text-2xl font-bold uppercase leading-tight">Siga a gente no Instagram</p>
+          <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-lg">
+            {[
+              ['https://www.instagram.com/grupoupper/', '@grupoupper'],
+              ['https://www.instagram.com/br7.mkt_/', '@br7.mkt_'],
+            ].map(([href, handle]) => (
+              <a key={handle} href={href} target="_blank" rel="noreferrer" className="font-semibold text-upper-2 underline-offset-2 hover:underline">
+                {handle}
+              </a>
+            ))}
+          </div>
+          <p className="mt-4 text-muted">
+            Conheça mais no site{' '}
+            <a href="https://www.grupouppergr.com.br/" target="_blank" rel="noreferrer" className="font-semibold text-upper-2 underline-offset-2 hover:underline">
+              grupouppergr.com.br
+            </a>
+          </p>
         </div>
       </section>
 

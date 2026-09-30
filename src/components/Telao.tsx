@@ -28,7 +28,7 @@ export function Telao() {
       <header className="flex items-start justify-between gap-8">
         <div>
           <img src="/logo_branca.png" alt="UPPER GR" className="h-14 w-auto" />
-          <h1 className="mt-6 font-display text-7xl font-bold uppercase leading-none">Quanto você conhece a Upper?</h1>
+          <h1 className="mt-6 font-display text-7xl font-bold uppercase leading-none">Quanto você conhece a UPPER GR?</h1>
         </div>
         <div className="text-right">
           <p key={count} className="animate-rise font-display text-8xl font-bold leading-none tabular-nums text-upper-2">
