@@ -46,7 +46,7 @@ export function RegisterScreen({ onStart }: { onStart: (p: Player) => void }) {
                 <img src="/logo_branca.png" alt="UPPER GR" className="h-10 w-auto self-start md:h-12" />
                 <div>
                     <h1 className="font-display text-5xl font-bold uppercase leading-[0.92] md:text-7xl">
-                        Quanto você conhece a Upper?
+                        Quanto você conhece a Upper GR?
                     </h1>
                     <p className="mt-5 max-w-md text-lg text-muted">
                         5 perguntas, 10 segundos cada. Os 3 melhores aparecem no telão.
