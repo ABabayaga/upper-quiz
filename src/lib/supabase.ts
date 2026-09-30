@@ -59,12 +59,11 @@ export type NewResult = {
     return count ?? 0
   }
 
-  export async function instagramExists(instagram: string) {
-    const { data, error } = await supabase
-      .from('results')
-      .select('id')
-      .eq('instagram', instagram)
-      .limit(1)
-    if (error) throw error
-    return (data?.length ?? 0) > 0
+  // Reserva o @ no início do quiz: quem abandona no meio não consegue jogar de novo com ele.
+  export async function reserveInstagram(instagram: string) {
+    const { error } = await supabase.from('attempts').insert({ instagram })
+    if (error) {
+      if (error.code === '23505') throw new DuplicateInstagramError()
+      throw error
+    }
   }

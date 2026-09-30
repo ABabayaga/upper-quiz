@@ -6,10 +6,10 @@ import { Leaderboard } from './Leaderboard'
 import type { Answer } from './QuizScreen'
 import type { Player } from './RegisterScreen'
 
-type Props = { player: Player; answers: Answer[] }
+type Props = { player: Player; answers: Answer[]; restored?: boolean }
 type Status = 'saving' | 'saved' | 'duplicate' | 'error'
 
-export function ResultScreen({ player, answers }: Props) {
+export function ResultScreen({ player, answers, restored = false }: Props) {
   const score = answers.filter((a) => a.correct).length
   const points = score * POINTS_PER_HIT
   const timeMs = answers.reduce((sum, a) => sum + a.time_ms, 0)
@@ -31,7 +31,8 @@ export function ResultScreen({ player, answers }: Props) {
       })
       setStatus('saved')
     } catch (e) {
-      if (e instanceof DuplicateInstagramError) return setStatus('duplicate')
+      // ao recarregar a página o reenvio bate no próprio registro: já está salvo
+      if (e instanceof DuplicateInstagramError) return setStatus(restored ? 'saved' : 'duplicate')
       setErrorMsg(e instanceof Error ? e.message : 'Falha ao enviar')
       setStatus('error')
     }

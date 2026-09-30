@@ -1,6 +1,6 @@
 import { useState, type FormEvent, type ReactNode } from 'react'
 import { cleanInstagram } from '../lib/format'
-import { instagramExists } from '../lib/supabase'
+import { DuplicateInstagramError, reserveInstagram } from '../lib/supabase'
 import { sendToSheet } from '../lib/sheets'
 
 export type Player = { name: string; instagram: string }
@@ -24,13 +24,14 @@ export function RegisterScreen({ onStart }: { onStart: (p: Player) => void }) {
         setError(null)
         setChecking(true)
         try {
-            if (await instagramExists(ig)) {
-                return setError(`O @${ig} já participou. Cada @ pode jogar uma vez.`)
-            }
+            await reserveInstagram(ig)
             const player = { name: name.trim(), instagram: ig }
             sendToSheet(player)
             onStart(player)
-        } catch {
+        } catch (e) {
+            if (e instanceof DuplicateInstagramError) {
+                return setError(`O @${ig} já participou. Cada @ pode jogar uma vez.`)
+            }
             setError('Não foi possível verificar agora. Tente de novo.')
         } finally {
             setChecking(false)

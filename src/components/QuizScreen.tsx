@@ -7,7 +7,12 @@ export type Answer = { question: number; choice: number | null; time_ms: number;
 const FEEDBACK_MS = 900
 const LETTERS = ['A', 'B', 'C', 'D']
 
-export function QuizScreen({ onFinish }: { onFinish: (answers: Answer[]) => void }) {
+type Props = {
+  onProgress: (answers: Answer[]) => void
+  onFinish: (answers: Answer[]) => void
+}
+
+export function QuizScreen({ onProgress, onFinish }: Props) {
   const [index, setIndex] = useState(0)
   const [answers, setAnswers] = useState<Answer[]>([])
   const [left, setLeft] = useState(QUESTION_TIME_MS)
@@ -33,6 +38,7 @@ export function QuizScreen({ onFinish }: { onFinish: (answers: Answer[]) => void
       const next = [...answers, answer]
       setLocked(answer)
       setAnswers(next)
+      onProgress(next)
 
       window.setTimeout(() => {
         if (index + 1 >= QUESTIONS.length) return onFinish(next)
@@ -40,7 +46,7 @@ export function QuizScreen({ onFinish }: { onFinish: (answers: Answer[]) => void
         setLocked(null)
       }, FEEDBACK_MS)
     },
-    [answers, index, locked, onFinish, question.correct],
+    [answers, index, locked, onProgress, onFinish, question.correct],
   )
 
   // cronômetro da pergunta atual
