@@ -50,7 +50,7 @@ export function RegisterScreen({ onStart }: { onStart: (p: Player) => void }) {
                         Quanto você conhece a UPPER GR?
                     </h1>
                     <p className="mt-5 max-w-md text-lg text-muted">
-                        5 perguntas, 10 segundos cada. Os 3 melhores aparecem no telão.
+                        5 perguntas, 10 segundos cada.
                     </p>
                 </div>
             </section>
